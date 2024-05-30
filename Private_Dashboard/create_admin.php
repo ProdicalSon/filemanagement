@@ -11,7 +11,7 @@
          $user_status = mysqli_real_escape_string($conn,$_POST['admin_status']);
          
 
-	$q_checkadmin = $conn->query("SELECT * FROM `admin_login` WHERE `admin_user` = '$user_email'") or die(mysqli_error());
+	$q_checkadmin = $conn->query("SELECT * FROM `admin_login` WHERE `admin_user` = '$user_email'") or die(mysqli_error($conn));
 		$v_checkadmin = $q_checkadmin->num_rows;
 		if($v_checkadmin == 1){
 			echo '
@@ -21,7 +21,7 @@
 				</script>
 			';
 		}else{
-			$conn->query("INSERT INTO `admin_login` VALUES('','$user_name', '$user_email', '$user_password', '$user_status')") or die(mysqli_error());
+			$conn->query("INSERT INTO `admin_login` VALUES('','$user_name', '$user_email', '$user_password', '$user_status')") or die(mysqli_error($conn));
 			echo '
 				<script type = "text/javascript">
 					alert("Saved Admin Info");
